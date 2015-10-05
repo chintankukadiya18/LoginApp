@@ -10,13 +10,6 @@ Ext.define('LoginApp.view.main.MainController', {
     alias: 'controller.main',
 
     onItemSelected: function (sender, record) {
-        Ext.Msg.confirm('Confirm', 'Are you sure?', 'onConfirm', this);
-    },
-
-    onConfirm: function (choice) {
-        if (choice === 'yes') {
-            //
-        }
     },
     onClickLogoutButton: function () {
         // Remove the localStorage key/value
@@ -32,8 +25,32 @@ Ext.define('LoginApp.view.main.MainController', {
     },
     onAddNewClick : function(){
          Ext.create({
-            xtype : 'AddNewCandidate',
-            store : this.lookupReference('mainList').store
+             xtype : 'CandidateForm',
+             store : this.lookupReference('mainList').store,
+             name : 'ADD',
+             callback : 'onAddClick'
         })
+    },
+    onUpdateClick : function () {
+        Ext.create({
+            xtype : 'CandidateForm',
+            store : this.lookupReference('mainList').store,
+            record : this.lookupReference('mainList').getSelection(),
+            name : 'Update',
+            callback : 'onUpdateClick'
+        })
+    },
+    onDeleteClick : function () {
+        Ext.Msg.confirm('Confirm', 'Are you sure?', 'onConfirm', this);
+    },
+    onConfirm : function (choice) {
+        if (choice === 'yes') {
+            var mainList = this.lookupReference('mainList');
+            var store = mainList.store;
+            var record = mainList.getSelection();
+            store.remove(record[0]);
+            store.sync();
+            store.load();
+        }
     }
 });

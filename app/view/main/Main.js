@@ -34,7 +34,7 @@ Ext.define('LoginApp.view.main.Main', {
             bind: {
                 text: '{name}'
             },
-             flex : 0,
+            flex : 0
         },
         iconCls: 'fa-th-list'
     },

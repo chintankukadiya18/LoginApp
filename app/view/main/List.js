@@ -15,11 +15,13 @@ Ext.define('LoginApp.view.main.List', {
         text: 'Add New',
         handler : 'onAddNewClick'
     },{ 
-        xtype: 'button', 
-        text: 'Update' 
+        xtype: 'button',
+        text : 'Update',
+        handler : 'onUpdateClick'
     },{ 
-        xtype: 'button', 
-        text: 'Delete' 
+        xtype: 'button',
+        text : 'Delete',
+        handler : 'onDeleteClick'
     }],
     store: {
         type: 'peoplestore'
